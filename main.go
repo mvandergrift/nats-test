@@ -2,8 +2,8 @@ package main
 
 import (
 	"context"
-	"crypto/rand"
 	"fmt"
+	"math/rand"
 
 	"github.com/nats-io/nats.go"
 	"github.com/nats-io/nats.go/jetstream"
@@ -56,11 +56,11 @@ func fillKV(kv jetstream.KeyValue, size int) error {
 	return nil
 }
 
-func getKVRange(kv jetstream.KeyValue, size int) error {
+func getKVRange(kv jetstream.KeyValue, size int, runs int) error {
 	ctx := context.Background()
 
-	for i := 0; i < size; i++ {
-		key := fmt.Sprintf("key-%d", i)
+	for i := 0; i < runs; i++ {
+		key := fmt.Sprintf("key-%d", rand.Intn(size))
 		_, err := kv.Get(ctx, key)
 		if err != nil {
 			return err

@@ -38,6 +38,7 @@ func TestFillKV(t *testing.T) {
 
 func TestGetKVRange(t *testing.T) {
 	RANGE := 10000
+	RUNS := 10000
 
 	nc, err := connectToNats()
 	assert.NoError(t, err)
@@ -53,7 +54,7 @@ func TestGetKVRange(t *testing.T) {
 	})
 
 	t.Run("Get KV Range", func(t *testing.T) {
-		err = getKVRange(kv, RANGE)
+		err = getKVRange(kv, RANGE, RUNS)
 		assert.NoError(t, err)
 	})
 }
